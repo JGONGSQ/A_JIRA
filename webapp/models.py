@@ -33,6 +33,7 @@ class Issue(BaseDataModel):
     title = models.CharField(max_length=256)
     type = models.CharField(max_length=64, choices=TYPE, default=TYPE_TASK)
     summary = models.TextField()
+    date_registered = models.DateTimeField(null=True, blank=True)
     is_solved = models.BooleanField(default=False)
 
     def __str__(self):

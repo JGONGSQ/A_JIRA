@@ -1,5 +1,6 @@
 from django import forms
 from webapp.models import *
+from django.utils import timezone
 
 
 class IssueForm(forms.ModelForm):
@@ -14,6 +15,7 @@ class IssueForm(forms.ModelForm):
     def save(self, commit=True):
         issue = super(IssueForm, self).save(commit=False)
         issue.user = self.user
+        issue.date_registered = timezone.now()
         if commit:
             issue.save()
         return issue
