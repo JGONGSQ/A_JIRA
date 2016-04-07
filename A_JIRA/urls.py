@@ -21,4 +21,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'webapp.views.home'),
     url(r'^home/$', webapp_view.home, name='home'),
+
+    # url groups
+    url(r'^user/', include('webapp.urls_user', namespace='user')),
 ]

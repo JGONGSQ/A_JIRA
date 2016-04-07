@@ -9,6 +9,38 @@
 
 
 {% block body %}
-    <h2>This is the index page</h2>
+    {% if user.is_superuser %}
+                <div class="pull-right"><a href="{% url "user:issue_create_edit" %}"><input type="button" class="btn btn-primary" value="Report an issue"></a></div>
+    {% endif %}
+    {% if issues %}
+        <div class="row">
+            <div class="col-lg-12 underline" style="overflow: hidden">
+                <h2>Current Issues:</h2>
+
+
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Submitted Date</th>
+                <th>Summary</th>
+            </tr>
+            </thead>
+            {% for issue in issues %}
+                <tr>
+                    <td>{{ issue.title }}</td>
+                    <td>{{ issue.type }}</td>
+                    <td>{{ issue.date_registered }}</td>
+                    <td>{{ issue.summary }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h4>There are no issues at current</h4>
+    {% endif %}
 
 {%  endblock %}

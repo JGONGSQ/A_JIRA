@@ -1,0 +1,79 @@
+{% extends 'webapp/base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% load csstag %}
+
+{%  block head %}
+    <script>
+        $(function () {
+            $('#date1').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12 underline">
+            <h3>Report a new issue </h3>
+        </div>
+    </div>
+
+
+    <form id="issue_create" action="{% url 'user:issue_create_edit' %}" method="POST"
+          class="form-horizontal" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div>
+                <br/>
+                {% for field in issue_form %}
+                    {% if field.errors %}
+                        <span class="label label-danger">
+                            {{ field.errors|striptags }}
+                        </span>
+                    {% endif %}
+
+                    {% if field.name == 'dob' %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label>
+                                    {{ field.label }}
+                                </label>
+                            </div>
+                            <div class='input-group input-group-date date col-lg-12' id="date1">
+                                {{ field|addcss:'form-control'}}
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label>
+                                    {{ field.label }}
+                                </label>
+                                {{ field | addcss:"form-control"}}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <br/>
+                {% endfor %}
+
+
+                <div class="row">
+                    <div class="col-lg-12 button-row">
+                        <div class="pull-left">
+                            <a href="{% url "home" %}">
+                                <input type="button" class="btn btn-danger" value="Cancel">
+                            </a>
+                        </div>
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary" value="save" name="save">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+{% endblock %}
