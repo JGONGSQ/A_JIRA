@@ -22,7 +22,7 @@
     </div>
 
 
-    <form id="issue_create" action="{% url 'user:issue_create_edit' %}" method="POST"
+    <form id="issue_create_edit" action="{% url 'user:issue_create_edit' %}" method="POST"
           class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
             <div>
