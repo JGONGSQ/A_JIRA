@@ -4,6 +4,7 @@ from django.conf import settings
 from webapp.models import *
 from webapp.forms import *
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 
 # Create your views here.
@@ -47,19 +48,18 @@ def home(request):
 
 def issue_create_edit(request):
     c = {}
-    user = request.user
-
     issue = None
 
     if request.POST:
-        issue_form = IssueForm(request.POST, instance=issue)
+        issue_form = IssueForm(request.user, request.POST, instance=issue)
+
         if issue_form.is_valid():
-            new_issue = issue_form.save()
-            return HttpResponseRedirect('home')
+            issue_form.save()
+            return HttpResponseRedirect(reverse('home'))
         else:
             c['issue_form'] = issue_form
     else:
-        c['issue_form'] = IssueForm(user, instance=issue)
+        c['issue_form'] = IssueForm(request.user, instance=issue)
 
     return render(request, 'webapp/issue_create_edit.html', c)
 

@@ -16,6 +16,7 @@ class IssueForm(forms.ModelForm):
         issue = super(IssueForm, self).save(commit=False)
         issue.user = self.user
         issue.date_registered = timezone.now()
+        issue.is_solved = False
         if commit:
             issue.save()
         return issue

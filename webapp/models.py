@@ -31,7 +31,7 @@ class Issue(BaseDataModel):
 
     user = models.ForeignKey(User)
     title = models.CharField(max_length=256)
-    type = models.CharField(max_length=64, choices=TYPE, default=TYPE_TASK)
+    type = models.CharField(max_length=64, choices=TYPE, default=None)
     summary = models.TextField()
     date_registered = models.DateTimeField(null=True, blank=True)
     is_solved = models.BooleanField(default=False)
