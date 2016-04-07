@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from jira import JIRA
 from django.conf import settings
 from webapp.models import *
 from webapp.forms import *
@@ -11,9 +10,6 @@ from django.core.urlresolvers import reverse
 
 
 def home(request):
-
-    # issue = settings.AUTHED_JIRA.issue('AJ-1')
-    # print(issue)
 
     issues = Issue.objects.filter(is_solved=False).order_by('type')
 
