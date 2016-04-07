@@ -1,0 +1,127 @@
+{% load static %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A_JIRA</title>
+
+    <script type="text/javascript" src="{% static 'webapp/js/jquery-1.11.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/jquery.cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/alerts.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/moment.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/collapse.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/grant_application.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/search.js' %}"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script type="text/javascript" src="{% static 'webapp/js/bootstrap-datepicker.js' %}"></script>
+    <link href="{% static 'webapp/css/webappv1.2.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'webapp/css/forms1.1.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'webapp/css/datepicker.css' %}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'webapp/css/bootstrap-datetimepicker.min.css' %}"/>
+    <link href="{% static 'webapp/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+
+    <style>
+        table {
+            font-size: 14px;
+        }
+        .label-as-badge {
+             border-radius: 1em;
+        }
+    </style>
+
+    {% comment %} For IE 8 bootstrap compatibility {% endcomment %}
+    <script type="text/javascript" src="{% static 'webapp/js/respond.matchmedia.addListener.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/js/respond.min.js' %}"></script>
+    {% block head %}
+    {% endblock %}
+
+
+</head>
+<body>
+
+
+    <div id="header">
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+{#                    <a class="navbar-brand" href="{% url 'home' %}">#}
+{#                      <img src="{% static 'webapp/images/qq_one.jpg' %}" title="corneliaQ" alt="corneliaQ" style="width:95px;height:95px;"/>#}
+{#                    </a>#}
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+    {#                        <li><a href="{% url 'auth:manageAccount' %}">Manage account</a></li>#}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        {{ user.first_name }} <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% if user.is_superuser %}
+                                    <li><a href="{% url 'admin:index' %}">{% bootstrap_icon 'cog' %} Django Admin</a>
+                                {% endif %}
+{#                                <li><a href="{% url 'user:user_home' %}">My</a></li>#}
+
+{#                                <li><a href="{% url 'auth:logout' %}">Log out</a></li>#}
+                            </ul>
+                        </li>
+                    </ul>
+
+
+                {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'auth:login' %}">Login</a></li>
+
+                    </ul>
+                {% endif %}
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        {% block header %}
+        {% endblock %}
+
+    </div>
+
+{% bootstrap_messages %}
+
+    <div class="container">
+
+        {% if user.is_authenticated and user.profile.type != 'COORDINATOR' and user.profile.type != 'ADMIN' and user.profile.type != 'SUPER'%}
+            {% if not user.profile.is_uwa_affiliated_basic_check and not on_pheme_link_page %}
+{#                {% include "webapp/partials/_alert_uwa_pheme.html" %}#}
+                <script type="text/javascript">create_or_increment_cookie_counter(pheme_cookie);</script>
+            {%  endif %}
+        {%  endif %}
+
+        {% block body %}
+        {% endblock %}
+    </div>
+
+
+    {% block secondBody %}
+    {% endblock %}
+
+</body>
+</html>
