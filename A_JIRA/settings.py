@@ -113,3 +113,5 @@ TEMPLATE_DIRS = (
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+JIRA_USERNAME = 'james.gong927@gmail.com'
+JIRA_PASSWORD = '19900927James'
