@@ -12,34 +12,12 @@ from django.core.urlresolvers import reverse
 
 def home(request):
 
-    # options = {
-    #     'server': 'https://jira.atlassian.com'
-    # }
-    # jira = JIRA(options)
+    # issue = settings.AUTHED_JIRA.issue('AJ-1')
+    # print(issue)
 
-    # print(settings.JIRA_PASSWORD, settings.JIRA_USERNAME)
-    # authed_jira = JIRA(basic_auth=(str(settings.JIRA_USERNAME), str(settings.JIRA_PASSWORD)))
-
-    # projects = authed_jira.projects()
-    # projects = jira.projects()
-    # keys = sorted([project.key for project in projects])[2:5]
-    # if projects:
-    #     for project in projects:
-    #         print('project:', project)
-    # else:
-    #     print('projects are empty')
-    #
-    # issue = jira.issue('JRA-1330')
-    # if issues:
-    #     for issue in issues:
-    #         print('issue:', issue)
-    # else:
-    #     print('issues are empty')
-    # print('Issue:', issue)
     issues = Issue.objects.filter(is_solved=False).order_by('type')
 
     c = {
-        # 'projects': projects,
         'issues': issues
     }
 
@@ -47,6 +25,11 @@ def home(request):
 
 
 def issue_create_edit(request):
+    """
+    :param request:
+    :return: form page or back to home page if the form is valid.
+    """
+
     c = {}
     issue = None
 
@@ -54,7 +37,13 @@ def issue_create_edit(request):
         issue_form = IssueForm(request.user, request.POST, instance=issue)
 
         if issue_form.is_valid():
-            issue_form.save()
+            new_issue = issue_form.save()
+            issue_dict = {
+                'project': {'key': 'AJ'},
+                'summary': new_issue.summary,
+                'issuetype': {'name': new_issue.type},
+            }
+            jira_new_issue = settings.AUTHED_JIRA.create_issue(fields=issue_dict)
             return HttpResponseRedirect(reverse('home'))
         else:
             c['issue_form'] = issue_form

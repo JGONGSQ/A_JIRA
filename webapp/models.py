@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 
 
 class BaseDataModel(models.Model):
+    """
+    Define a general Model class with some useful functions
+    """
+
     def get_field_names(self):
         return [field.name for field in self._meta.fields]
 
@@ -19,7 +23,7 @@ class Issue(BaseDataModel):
     """
     Register Issue Information
     """
-    TYPE_BUG = 'BUG'
+    TYPE_BUG = 'Bug'
     TYPE_IMPROVEMENT = 'IMPROVEMENT'
     TYPE_TASK = 'TASK'
 
