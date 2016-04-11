@@ -1,4 +1,4 @@
-{% extends 'webapp/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% load bootstrap3 %}
 {% load csstag %}
@@ -21,7 +21,6 @@
         </div>
     </div>
 
-
     <form id="issue_create_edit" action="{% url 'user:issue_create_edit' %}" method="POST"
           class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
@@ -34,33 +33,16 @@
                         </span>
                     {% endif %}
 
-                    {% if field.name == 'dob' %}
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label>
-                                    {{ field.label }}
-                                </label>
-                            </div>
-                            <div class='input-group input-group-date date col-lg-12' id="date1">
-                                {{ field|addcss:'form-control'}}
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>
+                                {{ field.label }}
+                            </label>
+                            {{ field | addcss:"form-control"}}
                         </div>
-                    {% else %}
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label>
-                                    {{ field.label }}
-                                </label>
-                                {{ field | addcss:"form-control"}}
-                            </div>
-                        </div>
-                    {% endif %}
+                    </div>
                     <br/>
                 {% endfor %}
-
 
                 <div class="row">
                     <div class="col-lg-12 button-row">

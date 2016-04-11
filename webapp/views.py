@@ -19,7 +19,7 @@ def home(request):
     :return Home page:
     """
 
-    # lists all the unsolved issues
+    # lists all the unsolved issues on index page
     issues = Issue.objects.filter(is_solved=False).order_by('type')
 
     c = {
@@ -27,6 +27,16 @@ def home(request):
     }
 
     return render(request, 'webapp/index.html', c)
+
+
+# this method could be used many times, so define it as method
+def create_issue_jira(issue_dict):
+    # error checking to prevent the failure of API implement
+    try:
+        settings.AUTHED_JIRA.create_issue(fields=issue_dict)
+    except Exception as e:
+        raise e
+    return
 
 
 @login_required()
@@ -43,16 +53,18 @@ def issue_create_edit(request):
     if request.POST:
         issue_form = IssueForm(request.user, request.POST, instance=issue)
 
-        # error checking in form
+        # error checking for form
         if issue_form.is_valid():
 
             new_issue = issue_form.save()
+            # set an dictionary for JIRA API
             issue_dict = {
                 'project': {'key': 'AJ'},
                 'summary': new_issue.summary,
                 'issuetype': {'name': new_issue.type},
             }
-            settings.AUTHED_JIRA.create_issue(fields=issue_dict)
+            # create the issue on the JIRA instance
+            create_issue_jira(issue_dict)
             return HttpResponseRedirect(reverse('home'))
         else:
             # replace the form with form error massages
@@ -60,6 +72,6 @@ def issue_create_edit(request):
     else:
         c['issue_form'] = IssueForm(request.user, instance=issue)
 
-    return render(request, 'webapp/issue_create_edit.html', c)
+    return render(request, 'webapp/issue_create_edit_form.html', c)
 
 

@@ -28,6 +28,6 @@ class IssueFormTest(TestCase):
             'is_solved': False
         }
 
-    def test_filled_form_is_valid(self):
+    def test_form_filled_with_valid_data_is_valid(self):
         form = IssueForm(self.user, self.valid_data)
         self.assertTrue(form.is_valid(), "error are" + form.errors.as_text())

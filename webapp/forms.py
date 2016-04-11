@@ -8,7 +8,7 @@ from .models import Issue
 
 class IssueForm(forms.ModelForm):
     """
-    Create model forms based on the Issue model
+    Create a model form based on the Issue model
     """
     class Meta:
         model = Issue
