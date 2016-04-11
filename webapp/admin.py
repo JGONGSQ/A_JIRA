@@ -1,4 +1,7 @@
+# Core Django imports
 from django.contrib import admin
+
+# Imports from my apps
 from webapp.models import *
 
 # Register your models here.

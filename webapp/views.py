@@ -1,9 +1,13 @@
+# Core Django imports
 from django.shortcuts import render
 from django.conf import settings
-from webapp.models import *
-from webapp.forms import *
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+
+# Imports from my apps
+from webapp.models import *
+from webapp.forms import *
+
 
 
 # Create your views here.

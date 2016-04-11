@@ -1,6 +1,9 @@
+# Core Django imports
 from django import forms
-from webapp.models import *
 from django.utils import timezone
+
+# Imports from my apps
+from webapp.models import *
 
 
 class IssueForm(forms.ModelForm):
