@@ -86,5 +86,7 @@ TEMPLATE_DIRS = (
 
 STATIC_URL = '/static/'
 
+TESTING_PROJECT = 'AJ'
+
 from jira import JIRA
 AUTHED_JIRA = JIRA(server='https://jamesjira.atlassian.net', basic_auth=('admin', 'admin'))

@@ -34,9 +34,10 @@ def create_issue_jira(issue_dict):
     # error checking to prevent the failure of API implement
     try:
         settings.AUTHED_JIRA.create_issue(fields=issue_dict)
-    except Exception as e:
-        raise e
-    return
+        return {True, 'Success'}
+    except Exception as error:
+        return {False, error}
+
 
 
 @login_required()
@@ -59,7 +60,7 @@ def issue_create_edit(request):
             new_issue = issue_form.save()
             # set an dictionary for JIRA API
             issue_dict = {
-                'project': {'key': 'AJ'},
+                'project': {'key': settings.TESTING_PROJECT},
                 'summary': new_issue.summary,
                 'issuetype': {'name': new_issue.type},
             }
