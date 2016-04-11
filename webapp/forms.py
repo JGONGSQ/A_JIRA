@@ -3,7 +3,7 @@ from django import forms
 from django.utils import timezone
 
 # Imports from my apps
-from webapp.models import Issue
+from .models import Issue
 
 
 class IssueForm(forms.ModelForm):

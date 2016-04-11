@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
 # Imports from my apps
-from webapp.models import Issue
-from webapp.forms import IssueForm
+from .models import Issue
+from .forms import IssueForm
 
 
 # Create your views here.

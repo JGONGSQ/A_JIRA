@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Imports from my apps
-from webapp.models import *
+from .models import Issue
 
 # Register your models here.
 

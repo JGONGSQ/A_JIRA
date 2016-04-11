@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 # Imports from my apps
-from webapp.models import *
-from webapp.forms import IssueForm
+from .models import Issue
+from .forms import IssueForm
 
 # Create your tests here.
 
