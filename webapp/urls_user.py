@@ -1,7 +1,7 @@
 # Core Django imports
 from django.conf.urls import patterns, url
 
-# Imports from my apps
+# Imports from apps
 from webapp import views
 
 

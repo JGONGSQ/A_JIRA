@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-# # Imports from my apps
+# # Imports from apps
 from webapp import views as webapp_views, urls_user
 
 # urls at root of the project

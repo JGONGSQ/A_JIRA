@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-# Imports from my apps
+# Imports from apps
 from .models import Issue
 from .forms import IssueForm
 

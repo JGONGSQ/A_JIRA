@@ -1,7 +1,7 @@
 # Core Django imports
 from django.contrib import admin
 
-# Imports from my apps
+# Imports from apps
 from .models import Issue
 
 # Register your models here.

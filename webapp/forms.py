@@ -2,7 +2,7 @@
 from django import forms
 from django.utils import timezone
 
-# Imports from my apps
+# Imports from apps
 from .models import Issue
 
 

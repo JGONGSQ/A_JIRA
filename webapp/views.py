@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-# Imports from my apps
+# Imports from apps
 from .models import Issue
 from .forms import IssueForm
 
