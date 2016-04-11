@@ -1,6 +1,4 @@
-Django
+Django==1.8.3
 django-bootstrap3==6.1.0
-PyMySQL==0.6.6
 django-contrib-comments==1.6.1
-jira
-pycrypto
+Make

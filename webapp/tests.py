@@ -1,11 +1,11 @@
 # Core Django imports
 from django.test import TestCase
 from django.contrib.auth.models import User
-from webapp.forms import *
 from django.utils import timezone
 
 # Imports from my apps
 from webapp.models import *
+from webapp.forms import IssueForm
 
 # Create your tests here.
 

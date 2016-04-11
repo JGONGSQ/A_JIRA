@@ -9,7 +9,6 @@ from webapp.models import *
 from webapp.forms import *
 
 
-
 # Create your views here.
 
 
