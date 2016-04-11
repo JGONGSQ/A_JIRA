@@ -53,10 +53,12 @@ class JiraApiTest(TestCase):
             'is_solved': False
         }
 
+    # test the JIRA api with valid data
     def test_jira_api_with_valid_data(self):
         created, msg = create_issue_jira(self.issue_dict_valid)
         self.assertTrue(created, "KeyError: {0}".format(str(msg)))
 
+    # test the JIRA api with invalid data
     def test_jira_api_with_invalid_data(self):
         created, msg = create_issue_jira(self.issue_dict_invalid)
         self.assertFalse(created, "KeyError: {0}".format(str(msg)))
