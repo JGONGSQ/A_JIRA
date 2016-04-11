@@ -3,10 +3,13 @@ from django import forms
 from django.utils import timezone
 
 # Imports from my apps
-from webapp.models import *
+from webapp.models import Issue
 
 
 class IssueForm(forms.ModelForm):
+    """
+    Create model forms based on the Issue model
+    """
     class Meta:
         model = Issue
         exclude = ['user', 'is_solved', 'date_registered']
@@ -15,6 +18,7 @@ class IssueForm(forms.ModelForm):
         super(IssueForm, self).__init__(*args, **kwargs)
         self.user = user
 
+    # register the information in the save method
     def save(self, commit=True):
         issue = super(IssueForm, self).save(commit=False)
         issue.user = self.user

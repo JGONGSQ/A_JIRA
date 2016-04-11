@@ -18,13 +18,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 # # Imports from my apps
-from webapp import views as webapp_view
+from webapp import views as webapp_views, urls_user
 
+# urls at root of the project
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'webapp.views.home'),
-    url(r'^home/$', webapp_view.home, name='home'),
+    # some basic urls
+    url(r'^$', webapp_views.home),
+    url(r'^home/$', webapp_views.home, name='home'),
 
-    # url groups
-    url(r'^user/', include('webapp.urls_user', namespace='user')),
+    # urls for each group
+    url(r'^user/', include(urls_user, namespace='user')),
+    url(r'^admin/', include(admin.site.urls)),
 ]

@@ -12,10 +12,12 @@ from webapp.forms import IssueForm
 
 class IssueFormTest(TestCase):
 
+    # define some defaults data in the json file
     fixtures = [
         'webapp_test_users.json'
     ]
 
+    # setUp some defaults data for this test
     def setUp(self):
         self.user = User.objects.get(id=1)
         self.valid_data = {

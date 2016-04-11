@@ -22,7 +22,7 @@ class BaseDataModel(models.Model):
 
 class Issue(BaseDataModel):
     """
-    Register Issue Information
+    Register Issue Information, add linked to the particular user
     """
     TYPE_BUG = 'Bug'
     TYPE_IMPROVEMENT = 'IMPROVEMENT'
