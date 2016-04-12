@@ -12,7 +12,7 @@ class IssueForm(forms.ModelForm):
     """
     class Meta:
         model = Issue
-        exclude = ['user', 'is_solved', 'date_registered']
+        fields = ['title', 'type', 'summary']
 
     def __init__(self, user, *args, **kwargs):
         super(IssueForm, self).__init__(*args, **kwargs)

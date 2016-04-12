@@ -13,12 +13,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+92261zuxi5@wp=x%!k(+0vs46jo%q=)u45&3bf852=qz5pmbl'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -28,8 +26,6 @@ ADMINS = [
 
     ('James Gong', 'james.gong927@gmail.com'),
 ]
-
-# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -59,14 +55,6 @@ ROOT_URLCONF = 'A_JIRA.urls'
 WSGI_APPLICATION = 'A_JIRA.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'a_jira',
-        'USER': 'root'
-    }
-}
-
 SITE_ID = 1
 
 LANGUAGE_CODE = 'en-au'
@@ -79,14 +67,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+PROTOCOL = 'http'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
 STATIC_URL = '/static/'
-
-TESTING_PROJECT = 'AJ'
-
-from jira import JIRA
-AUTHED_JIRA = JIRA(server='https://jamesjira.atlassian.net', basic_auth=('admin', 'admin'))

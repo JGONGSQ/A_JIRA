@@ -65,6 +65,7 @@ def issue_create_edit(request):
                 'issuetype': {'name': new_issue.type},
             }
             # create the issue on the JIRA instance
+            # TODO would need error catch as well for the issue created
             create_issue_jira(issue_dict)
             return HttpResponseRedirect(reverse('home'))
         else:
