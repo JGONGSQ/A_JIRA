@@ -14,4 +14,5 @@ DATABASES = {
 TESTING_PROJECT = 'AJ'
 
 from jira import JIRA
-AUTHED_JIRA = JIRA('https://jira.atlassian.com')
+# AUTHED_JIRA = JIRA('https://jira.atlassian.com')
+AUTHED_JIRA = JIRA()
