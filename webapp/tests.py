@@ -20,7 +20,7 @@ class IssueFormTest(TestCase):
         'webapp_test_users.json'
     ]
 
-    # setUp some defaults data for this test
+    # setup some defaults data for this test
     def setUp(self):
         self.user = User.objects.get(id=1)
         self.valid_data = {
@@ -39,6 +39,7 @@ class IssueFormTest(TestCase):
 
 class JiraApiTest(TestCase):
 
+    # setup some defaults data for this test
     def setUp(self):
         self.issue_dict_valid = {
             'project': {'key': settings.TESTING_PROJECT},
@@ -62,4 +63,7 @@ class JiraApiTest(TestCase):
     def test_jira_api_with_invalid_data(self):
         created, msg = create_issue_jira(self.issue_dict_invalid)
         self.assertFalse(created, "KeyError: {0}".format(str(msg)))
+
+
+
 

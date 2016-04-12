@@ -39,7 +39,6 @@ def create_issue_jira(issue_dict):
         return {False, error}
 
 
-
 @login_required()
 def issue_create_edit(request):
     """

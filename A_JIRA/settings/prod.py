@@ -1,6 +1,6 @@
-from .base import *
+from .dev import *
 
 # This could be replaced with production key
 
-# from jira import JIRA
-# AUTHED_JIRA = JIRA(server='https://jamesjira.atlassian.net', basic_auth=('admin', 'admin'))
+from jira import JIRA
+AUTHED_JIRA = JIRA(server='https://jamesjira.atlassian.net', basic_auth=('admin', 'admin'))
