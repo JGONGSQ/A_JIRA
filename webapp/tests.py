@@ -14,7 +14,7 @@ from webapp.views import create_issue_jira
 import unittest
 import mock
 import sys, os
-# from jira import JIRA
+from jira import JIRA, Issue
 import json
 
 # Create your tests here.
@@ -83,18 +83,28 @@ class MockHTTPResponse(object):
 
 class JIRAApiTest(unittest.TestCase):
 
-    def test_issue_search(self):
-        api_mock = mock.Mock()
-        Issue.api = mock.Mock(return_value=api_mock)
-        api_mock.get.return_value = MockHTTPResponse(200, '{"issue":[]}')
-        issue = Issue.search('jql')
-        api_mock.get.assert_called_with('search', {'jql': 'jql', 'fields': 'summary, status'})
-        issue = Issue.search('more jql', 'summary,description')
-        api_mock.get.assert_called_with('search', {'jql': 'more jql', 'fields': 'summary,description' })
+
+        # setup some defaults data for this test
+    def setUp(self):
+        self.issue_dict_valid = {
+            'project': {'key': settings.TESTING_PROJECT},
+            'summary': 'This the testing summary',
+            'issuetype': {'name': 'Bug'}
+        }
+
+    # def test_issue_search(self):
+    #     api_mock = mock.Mock()
+    #     Issue.api = mock.Mock(return_value=api_mock)
+    #     api_mock.get.return_value = MockHTTPResponse(200, '{"issue":[]}')
+    #     issue = Issue.search('jql')
+    #     api_mock.get.assert_called_with('search', {'jql': 'jql', 'fields': 'summary, status'})
+    #     issue = Issue.search('more jql', 'summary,description')
+    #     api_mock.get.assert_called_with('search', {'jql': 'more jql', 'fields': 'summary,description' })
 
     def test_issue_create(self):
         api_mock = mock.Mock()
-        Issue.api = mock.Mock(return_value=api_mock)
+        JIRA().api = mock.Mock(return_value=api_mock)
+        print(JIRA().api)
         api_mock.send.return_value = MockHTTPResponse(201, '')
-        issue = Issue.create({'project': 'ZEUS'})
-        api_mock.send.assert_called_with('POST', 'issue', { 'fields': { 'project': 'ZEUS' } })
+        issue = JIRA().create_issue(fields=self.issue_dict_valid)
+        api_mock.send.assert_called_with('POST', 'issue', {'fields': self.issue_dict_valid})
