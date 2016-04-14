@@ -26,6 +26,12 @@ OAUTH = False
 CONSUMER_KEY = 'oauth-consumer'
 KEY_CERT_FILE = '/home/bspeakmon/src/atlassian-oauth-examples/rsa.pem'
 KEY_CERT_DATA = None
+CI_JIRA_URL = "http://localhost:2990/jira"
+CI_JIRA_ADMIN = "admin"
+CI_JIRA_ADMIN_PASSWORD="admin"
+# CI_JIRA_USER=jira_user
+# CI_JIRA_USER_PASSWORD=jira
+# CI_JIRA_ISSUE=Task
 
 
 # Create your tests here.
@@ -53,7 +59,7 @@ class IssueFormTest(TestCase):
         self.assertTrue(form.is_valid(), "error are" + form.errors.as_text())
 
 
-if 'CI_JIRA_URL' in os.environ:
+if CI_JIRA_URL in os.environ:
     not_on_custom_jira_instance = pytest.mark.skipif(True, reason="Not applicable for custom JIRA instance")
     print('Picked up custom JIRA engine.')
 else:
@@ -92,19 +98,19 @@ class JiraTestManager(object):
 
             try:
 
-                if 'CI_JIRA_URL' in os.environ:
+                if CI_JIRA_URL in os.environ:
                     self.CI_JIRA_URL = os.environ['CI_JIRA_URL']
                     self.max_retries = 5
                 else:
                     self.CI_JIRA_URL = "https://pycontribs.atlassian.net"
                     self.max_retries = 5
 
-                if 'CI_JIRA_ADMIN' in os.environ:
+                if CI_JIRA_ADMIN in os.environ:
                     self.CI_JIRA_ADMIN = os.environ['CI_JIRA_ADMIN']
                 else:
                     self.CI_JIRA_ADMIN = 'ci-admin'
 
-                if 'CI_JIRA_ADMIN_PASSWORD' in os.environ:
+                if CI_JIRA_ADMIN_PASSWORD in os.environ:
                     self.CI_JIRA_ADMIN_PASSWORD = os.environ[
                         'CI_JIRA_ADMIN_PASSWORD']
                 else:
@@ -240,7 +246,6 @@ class JiraTestManager(object):
                 self.project_b_issue3 = self.project_b_issue3_obj.key
 
             except Exception as e:
-                print(e, '12313131231231231231231231')
                 # exc_type, exc_value, exc_traceback = sys.exc_info()
                 formatted_lines = traceback.format_exc().splitlines()
                 msg = "Basic test setup failed: %s\n\t%s" % (
