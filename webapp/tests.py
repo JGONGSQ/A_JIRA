@@ -10,7 +10,14 @@ from .forms import IssueForm
 
 # Imports from Python calls
 import unittest
-import sys, re, os, logging, getpass, random, string, traceback
+import sys
+import re
+import os
+import logging
+import getpass
+import random
+import string
+import traceback
 import inspect, pickle, platform
 import jira
 from jira import JIRA, Issue, JIRAError
